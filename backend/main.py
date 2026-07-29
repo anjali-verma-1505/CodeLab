@@ -15,7 +15,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "https://ritesh-kumar-verma.io"
+        "https://ritesh-kumar-verma.github.io"
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -33,10 +33,9 @@ class RunResponse(BaseModel):
     error: str
     status: str
 
-@app.get('/health')
-def health():
-    return "All Good:)"
-
+@app.api_route("/api/health",methods=["GET","HEAD"])
+async def health_checkup():
+    return "All Good :)"
 
 
 @app.get("/")
