@@ -33,7 +33,7 @@ class RunResponse(BaseModel):
     error: str
     status: str
 
-@app.api_route("/api/health",methods=["GET","HEAD"])
+@app.api_route("/health",methods=["GET","HEAD"])
 async def health_checkup():
     return "All Good :)"
 
@@ -46,7 +46,7 @@ def home():
 
 
 
-@app.post("/api/run", response_model=RunResponse)
+@app.post("/run", response_model=RunResponse)
 def run_code(req: CodeRequest):
 
     if len(req.code) > 10000:
