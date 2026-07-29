@@ -15,7 +15,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "https://anjali-verma-1505.github.io/CodeLab/"
+        "https://ritesh-kumar-verma.io/CodeLab/"
     ],
     allow_credentials=True,
     allow_methods=["*"],
