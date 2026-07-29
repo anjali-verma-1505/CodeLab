@@ -34,9 +34,9 @@ class RunResponse(BaseModel):
     status: str
 
 @app.get('/health')
-def health(){
+def health():
     return "All Good:)"
-}
+
 
 
 @app.get("/")
