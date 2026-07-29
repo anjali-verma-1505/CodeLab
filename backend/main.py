@@ -33,6 +33,10 @@ class RunResponse(BaseModel):
     error: str
     status: str
 
+@app.get('/health')
+def health(){
+    return "All Good:)"
+}
 
 
 @app.get("/")
