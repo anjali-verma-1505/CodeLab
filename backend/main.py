@@ -143,79 +143,79 @@ def run_code(req: CodeRequest):
 # @app.post("/api/run", response_model=RunResponse)
 # def run_code(req: CodeRequest):
 
-    if len(req.code) > 10000:
-        raise HTTPException(
-            status_code=400,
-            detail="Code too large"
-        )
+#     if len(req.code) > 10000:
+#         raise HTTPException(
+#             status_code=400,
+#             detail="Code too large"
+#         )
 
 
-    if req.language != "python":
-        raise HTTPException(
-            status_code=400,
-            detail="Only Python supported"
-        )
+#     if req.language != "python":
+#         raise HTTPException(
+#             status_code=400,
+#             detail="Only Python supported"
+#         )
 
 
-    filename = f"{uuid.uuid4()}.py"
+#     filename = f"{uuid.uuid4()}.py"
 
 
-    try:
+#     try:
 
-        with tempfile.TemporaryDirectory() as folder:
+#         with tempfile.TemporaryDirectory() as folder:
 
-            filepath = os.path.join(
-                folder,
-                filename
-            )
-
-
-            with open(filepath,"w") as f:
-                f.write(req.code)
+#             filepath = os.path.join(
+#                 folder,
+#                 filename
+#             )
 
 
-
-            process = subprocess.run(
-                [
-                    "python",
-                    filepath
-                ],
-                capture_output=True,
-                text=True,
-                timeout=5
-            )
-
-
-            if process.returncode == 0:
-
-                return {
-                    "output":process.stdout,
-                    "error":"",
-                    "status":"success"
-                }
-
-
-            return {
-                "output":process.stdout,
-                "error":process.stderr,
-                "status":"error"
-            }
+#             with open(filepath,"w") as f:
+#                 f.write(req.code)
 
 
 
-    except subprocess.TimeoutExpired:
+#             process = subprocess.run(
+#                 [
+#                     "python",
+#                     filepath
+#                 ],
+#                 capture_output=True,
+#                 text=True,
+#                 timeout=5
+#             )
 
-        return {
-            "output":"",
-            "error":"Execution timeout (5 seconds)",
-            "status":"timeout"
-        }
+
+#             if process.returncode == 0:
+
+#                 return {
+#                     "output":process.stdout,
+#                     "error":"",
+#                     "status":"success"
+#                 }
 
 
-    except Exception as e:
+#             return {
+#                 "output":process.stdout,
+#                 "error":process.stderr,
+#                 "status":"error"
+#             }
 
-        return {
-            "output":"",
-            "error":str(e),
-            "status":"server_error"
-        }
+
+
+#     except subprocess.TimeoutExpired:
+
+#         return {
+#             "output":"",
+#             "error":"Execution timeout (5 seconds)",
+#             "status":"timeout"
+#         }
+
+
+#     except Exception as e:
+
+#         return {
+#             "output":"",
+#             "error":str(e),
+#             "status":"server_error"
+#         }
